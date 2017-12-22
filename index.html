@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <title>Omega Dial</title>
+                <script src="jquery.min.js"></script>
+                <!--[if IE]><script type="text/javascript" src="excanvas.js"></script>
+                <script src="jquery.knob.min.js"></script>
+        </head>
+        <style>
+                body {
+                        text-align: center;
+                        font-family: sans-serif;
+                        color: #eeeeee;
+                        background: #323232;
+                }
+        </style>
+        <body>
+                <h2>Omega Dial</h2>
+                <div>
+                        <input type="text" value="0" class="dial" data-cursor=true>
+                </div>
+        </body>
+        <script>
+                $(function() {
+                        $(".dial").knob({
+                                'readOnly': true,
+                                'angleOffset': 225,
+                                'angleArc': 270,
+                                'min':0,
+                                'max':1023
+                        });
+                        var interval = 100;
+                        var dialValue = 0;
+                        // continuously run this code
+                        setInterval(function () {
+                                // http get request to /position endpoint
+                                $.get("/position", function (data) {
+                                        // assign position from response to the dial
+                                        $(".dial").val(data.position).trigger("change"
+                                });
+                        }, interval);
+                });
+        </script>
+</html>
