@@ -30,13 +30,12 @@
                                 'max':1023
                         });
                         var interval = 100;
-                        var dialValue = 0;
                         // continuously run this code
                         setInterval(function () {
                                 // http get request to /position endpoint
                                 $.get("/position", function (data) {
                                         // assign position from response to the dial
-                                        $(".dial").val(data.position).trigger("change"
+                                        $(".dial").val(data.position).trigger("change");
                                 });
                         }, interval);
                 });
